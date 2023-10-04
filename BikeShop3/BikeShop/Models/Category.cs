@@ -6,7 +6,8 @@ namespace BikeShop.Models
     {
         public int CategoryID { get; set; }
 
-        [Required(ErrorMessage = "Category Name is Required")]
+        [Required(ErrorMessage = "Category Name is Required!")]
         public string CategoryName { get; set; } = string.Empty;
+
     }
 }

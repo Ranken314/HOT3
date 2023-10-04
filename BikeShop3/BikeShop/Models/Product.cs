@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace BikeShop.Models
 {
@@ -8,29 +8,33 @@ namespace BikeShop.Models
     {
         public int ProductID { get; set; }
 
-        [Required(ErrorMessage = "The product name is required.")]
-        public string ProductName { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Product Name is Required!")]
+        public string Name { get; set; } = string.Empty;
 
+        public string? Description { get; set; }
         public string? ProductDescShort { get; set; }
         public string? ProductDescLong { get; set; }
-        public string? ProductImage { get; set; }
+        public string? Image { get; set; }
 
-        [Required(ErrorMessage = "The product price is required.")]
-        [Range(1, 100000, ErrorMessage = "The product price must be between 1 and 100,000.")]
-        [Column(TypeName = "decimal (8, 2)")]
-        public decimal ProductPrice { get; set; }
+        [Required(ErrorMessage = "Product Price is Required!")]
+        [Range(1, 100000, ErrorMessage = "Product Price Must be Between 1 and 100000")]
+        [Column(TypeName = "decimal(8, 2)")]
+        public decimal Price { get; set; } = 0.0M;
 
-        [Required(ErrorMessage = "The product quantity is required.")]
-        [Range(1, 100000, ErrorMessage = "The product quantity must be between 1 and 100,000.")]
-        public int ProductQty { get; set; }
+        [Required(ErrorMessage = "Product Quantity is Required!")]
+        [Range(1, 100000, ErrorMessage = "Product Quantity Must be Between 1 and 1000")]
+        public int Qty { get; set; } = 0;
 
-        [Required(ErrorMessage = "The category is required.")]
+        //  Foreign key
+        [ValidateNever]
+        [Required(ErrorMessage = "Category is Required!")]
         public int CategoryID { get; set; }
 
-        // Navigation property
+        //  Navigation property
         [ValidateNever]
         public Category? Category { get; set; }
 
-        public string Slug => ProductName?.Replace(' ', '-').ToLower() + '/' ?? string.Empty;
+        public string Slug =>
+            Name?.Replace(' ', '-').ToLower() + '/' ?? string.Empty;
     }
 }

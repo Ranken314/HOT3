@@ -26,12 +26,12 @@
         @foreach (var product in Model)
         {
             <tr>
-                <td>@product.ProductName</td>
+                <td>@product.Name</td>
                 <td>@product.ProductDescShort</td>
                 <td>@product.ProductDescLong</td>
-                <td>@product.ProductImage</td>
-                <td>@product.ProductPrice.ToString("c")</td>
-                <td>@product.ProductQty.ToString()</td>
+                <td>@product.Image</td>
+                <td>@product.Price.ToString("c")</td>
+                <td>@product.Qty.ToString()</td>
                 <td>@product.Category?.CategoryName</td>
                 <td>
                     <a asp-action="Edit"

@@ -20,7 +20,7 @@ namespace BikeShop.Controllers
         {
             List<Product> products = context.Products
                                             .Include(c => c.Category)
-                                            .OrderBy(p => p.ProductName)
+                                            .OrderBy(p => p.Name)
                                             .ToList();
 
             return View(products);

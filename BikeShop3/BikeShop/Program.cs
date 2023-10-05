@@ -1,6 +1,7 @@
 using BikeShop.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,13 +23,15 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
   name: "areas",
   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 );
 
-app.MapControllerRoute(
+@app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}/{slug}");
+    pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}"
+);
 
 app.Run();

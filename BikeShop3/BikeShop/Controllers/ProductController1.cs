@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BikeShop.Controllers
 {
+    [Route("Product/[controller]/[action]/{id?}")]
     public class ProductController : Controller
     {
         // Declare private context variable
@@ -16,7 +17,7 @@ namespace BikeShop.Controllers
         }
 
         //List all Product
-        public IActionResult List()
+        public IActionResult List(string id = "All")
         {
             List<Product> products = context.Products
                                             .Include(c => c.Category)

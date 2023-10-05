@@ -1,1 +1,51 @@
-﻿
+﻿@model List<Product>
+
+@{
+    ViewBag.Title = "Product Manager";
+}
+
+
+<h1 class="text-center">@ViewBag.Title</h1>
+
+
+<table class="table table-bordered table-srtiped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Short Desc</th>
+            <th>Long Desc</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.ProductDescShort</td>
+                <td>@product.ProductDescLong</td>
+                <td>@product.Image</td>
+                <td>@product.Price.ToString("c")</td>
+                <td>@product.Qty.ToString()</td>
+                <td>@product.Category?.CategoryName</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@product.ProductID"
+                       class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@product.ProductID"
+                       class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Product" asp-action="Add">Add New Product</a>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BikeShop.Migrations
 {
     [DbContext(typeof(BikeShopContext))]
-    [Migration("20231004204932_InitialSetup")]
+    [Migration("20231005002540_InitialSetup")]
     partial class InitialSetup
     {
         /// <inheritdoc />

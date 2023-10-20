@@ -8,18 +8,18 @@ namespace BikeShop.Controllers
     public class ProductController : Controller
     {
         // Declare private context variable
-        private BikeShopContext context { get; set; }
+        private BikeShopContext Context { get; set; }
 
         // Constructor
         public ProductController(BikeShopContext ctx)
         {
-            context = ctx;
+            Context = ctx;
         }
 
         //List all Product
         public IActionResult List()
         {
-            List<Product> products = context.Products
+            List<Product> products = Context.Products
                                             .Include(c => c.Category)
                                             .OrderBy(p => p.Name)
                                             .ToList();
@@ -31,7 +31,7 @@ namespace BikeShop.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            ViewBag.Category = context.Categories
+            ViewBag.Category = Context.Categories
                                       .OrderBy(c => c.CategoryName)
                                       .ToList();
 
@@ -44,10 +44,10 @@ namespace BikeShop.Controllers
             ViewBag.Action = "Edit";
 
             // Find the desired product to update
-            var product = context.Products.Find(id);
+            var product = Context.Products.Find(id);
 
             //  "Fill Up" the fields
-            ViewBag.Category = context.Categories
+            ViewBag.Category = Context.Categories
                                       .OrderBy(c => c.CategoryName)
                                       .ToList();
 
@@ -66,18 +66,18 @@ namespace BikeShop.Controllers
                 {
                     // Check for Product ID == 0
                     // If it is, this is an Add
-                    context.Products.Add(product);
+                    Context.Products.Add(product);
                 }
                 else
                 {
                     // Otherwise, this is an Update.
-                    context.Products.Update(product);
+                    Context.Products.Update(product);
                 }
 
                 // Regargless of whether this is an Add or an Update,
                 // save the changes to the database and then
                 // return to the product list ( can see changes).
-                context.SaveChanges();
+                Context.SaveChanges();
                 return RedirectToAction("List");
             }
             else
@@ -85,7 +85,7 @@ namespace BikeShop.Controllers
                 // Problem with the model validation
                 ViewBag.Action = (product.ProductID == 0) ? "Add" : "Edit";
 
-                ViewBag.Category = context.Categories
+                ViewBag.Category = Context.Categories
                                      .OrderBy(c => c.CategoryName)
                                      .ToList();
             }
@@ -97,7 +97,7 @@ namespace BikeShop.Controllers
         public ActionResult Delete(int id)
         {
             // Find the product to delete
-            var product = context.Products.Find(id);
+            var product = Context.Products.Find(id);
 
             return View(product);
         }
@@ -111,8 +111,8 @@ namespace BikeShop.Controllers
             // changes to the database, and then
             // return to the prouct list (See that 
             // the product was indeed removr).
-            context.Products.Remove(product);
-            context.SaveChanges();
+            Context.Products.Remove(product);
+            Context.SaveChanges();
 
             return RedirectToAction("List");
         }

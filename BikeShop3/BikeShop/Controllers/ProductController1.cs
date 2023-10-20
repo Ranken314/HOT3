@@ -13,11 +13,11 @@ namespace BikeShop.Controllers
         // Constructor
         public ProductController(BikeShopContext ctx)
         {
-            this.context = ctx;
+            context = ctx;
         }
 
         //List all Product
-        public IActionResult List(string id = "All")
+        public IActionResult List()
         {
             List<Product> products = context.Products
                                             .Include(c => c.Category)
